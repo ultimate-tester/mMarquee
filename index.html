@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="mMarquee.css">
+
+    <title>mMarquee Demonstration</title>
+
+    <style type="text/css">
+        .marquee-demo {
+            overflow: hidden;
+            width: 100%;
+            background-color: #d3d3d3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .marquee-demo div.marquee-demo-tile {
+            padding: 10px;
+            margin: 10px;
+            float: left;
+            border: 1px solid black;
+            background-color: #778899;
+        }
+    </style>
+</head>
+<body>
+<div class="marquee-demo">
+    <div class="marquee-demo-tile"></div>
+    <div class="marquee-demo-tile"></div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="mMarquee.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.marquee-demo').mMarquee();
+    });
+</script>
+</body>
+</html>

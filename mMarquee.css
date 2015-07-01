@@ -1,0 +1,5 @@
+.mMarquee-Wrapper {
+    overflow: hidden;
+    float: left;
+    position: absolute;
+}
