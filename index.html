@@ -10,37 +10,35 @@
         .marquee-demo {
             overflow: hidden;
             width: 100%;
-            background-color: #d3d3d3;
+
             margin: 0;
-            padding: 0;
+            padding: 10px 0;
+
+            background-color: #d3d3d3;
         }
 
         .marquee-demo a.marquee-demo-tile {
-            margin: 0;
-            padding: 10px;
-            float: left;
+            margin: 0 10px;
+            text-decoration: none;
         }
 
         .marquee-demo a.marquee-demo-tile img {
-            display: block;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
 <div class="marquee-demo">
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
-    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a>
+    <a class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/40/40/"/></a><a
+        class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/50/50/"/></a><a
+        class="marquee-demo-tile" href="javascript://"><img src="http://lorempixel.com/60/60/"/></a>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="mMarquee.js"></script>
 
 <script type="text/javascript">
-    $(function () {
+    $(window).load(function () {
         $('.marquee-demo').mMarquee();
     });
 </script>

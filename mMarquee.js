@@ -5,28 +5,22 @@
             frameSpeed: 400,
             freezeOnBlur: false,
             freezeOnClick: false,
-            freezeOnHover: true
+            freezeOnHover: false
         }, options);
 
         var playing = true;
         var $marquee = $(this);
         var $marqueeWrapper = $marquee.wrapInner('<div class="mMarquee-Wrapper"></div>').children().first();
+        var marqueeWrapperWidth = $marqueeWrapper.outerWidth();
         $marqueeWrapper.prop('mMarqueeCloneCreated', 'false');
 
-        var marqueeWrapperWidth = 0;
-        $marqueeWrapper.children().each(function (index, item) {
-            var $item = $(item);
-            marqueeWrapperWidth += $item.outerWidth(true);
-        });
-
-        $marqueeWrapper.width(marqueeWrapperWidth);
         $marquee.css('position', 'relative');
-        $marquee.height($marqueeWrapper.height());
+        $marquee.height($marqueeWrapper.outerHeight(true));
 
         function cloneWrapper(wrapper) {
             var clone = wrapper.clone().appendTo($marquee);
             clone.prop('mMarqueeCloneCreated', 'false');
-            clone.css('left', (clone.width() + parseInt(clone.css('left'))));
+            clone.css('left', parseInt(wrapper.css('left')) + marqueeWrapperWidth);
 
             loopMarquee(clone);
             return clone;
@@ -46,7 +40,7 @@
 
                     createClones(wrapper);
 
-                    if (left <= (-wrapper.outerWidth())) {
+                    if (left <= (-marqueeWrapperWidth)) {
                         wrapper.remove();
                         wrapper = undefined;
                     }
@@ -60,7 +54,7 @@
             if (wrapper.prop('mMarqueeCloneCreated') == 'false') {
                 var left = parseInt(wrapper.css('left'));
 
-                if ((left - settings.pixelsPerFrame) <= (-(wrapper.outerWidth() - $marquee.outerWidth()))) {
+                if ((left - marqueeWrapperWidth) <= (-(marqueeWrapperWidth - $marquee.outerWidth()))) {
                     wrapper.prop('mMarqueeCloneCreated', 'true');
                     createClones(cloneWrapper(wrapper));
                 }
