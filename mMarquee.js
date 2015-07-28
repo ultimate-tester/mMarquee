@@ -20,15 +20,13 @@
         });
 
         $marqueeWrapper.width(marqueeWrapperWidth);
-        $marqueeWrapper.outerHeight($marqueeWrapper.height());
-
         $marquee.css('position', 'relative');
         $marquee.height($marqueeWrapper.height());
 
         function cloneWrapper(wrapper) {
             var clone = wrapper.clone().appendTo($marquee);
             clone.prop('mMarqueeCloneCreated', 'false');
-            clone.css('left', (clone.width() + parseInt(clone.css('left')) + 1));
+            clone.css('left', (clone.width() + parseInt(clone.css('left'))));
 
             loopMarquee(clone);
             return clone;
@@ -39,7 +37,6 @@
                 return;
             }
 
-            var slideWidth = wrapper.children().outerWidth(true);
             var slideOffset = playing ? settings.pixelsPerFrame : 0;
             wrapper.stop().animate({'left': '-=' + slideOffset}, {
                 easing: 'linear',
@@ -47,12 +44,7 @@
                 complete: function () {
                     var left = parseInt(wrapper.css('left'));
 
-                    if (wrapper.prop('mMarqueeCloneCreated') == 'false') {
-                        if (left <= (-(wrapper.outerWidth() - $marquee.outerWidth()))) {
-                            wrapper.prop('mMarqueeCloneCreated', 'true');
-                            cloneWrapper(wrapper);
-                        }
-                    }
+                    createClones(wrapper);
 
                     if (left <= (-wrapper.outerWidth())) {
                         wrapper.remove();
@@ -62,6 +54,17 @@
                     loopMarquee(wrapper);
                 }
             });
+        }
+
+        function createClones(wrapper) {
+            if (wrapper.prop('mMarqueeCloneCreated') == 'false') {
+                var left = parseInt(wrapper.css('left'));
+
+                if ((left - settings.pixelsPerFrame) <= (-(wrapper.outerWidth() - $marquee.outerWidth()))) {
+                    wrapper.prop('mMarqueeCloneCreated', 'true');
+                    createClones(cloneWrapper(wrapper));
+                }
+            }
         }
 
         $marquee.click(function () {
@@ -94,6 +97,7 @@
             }
         });
 
+        createClones($marqueeWrapper);
         loopMarquee($marqueeWrapper);
         return $marqueeWrapper;
     }
