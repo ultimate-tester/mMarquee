@@ -14,8 +14,13 @@
         var marqueeWrapperWidth = $marqueeWrapper.outerWidth();
         $marqueeWrapper.prop('mMarqueeCloneCreated', 'false');
 
+        // Correct parent css styles
         $marquee.css('position', 'relative');
         $marquee.height($marqueeWrapper.outerHeight(true));
+
+        // Correct width and height of wrapper
+        $marqueeWrapper.outerWidth(marqueeWrapperWidth + 1);
+        $marqueeWrapper.children().css('line-height', $marquee.height() + 'px');
 
         function cloneWrapper(wrapper) {
             var clone = wrapper.clone().appendTo($marquee);
@@ -32,7 +37,7 @@
             }
 
             var slideOffset = playing ? settings.pixelsPerFrame : 0;
-            wrapper.stop().animate({'left': '-=' + slideOffset}, {
+            wrapper.stop(true, false).animate({'left': '-=' + slideOffset}, {
                 easing: 'linear',
                 duration: settings.frameDuration,
                 complete: function () {
