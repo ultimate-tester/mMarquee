@@ -1,3 +1,4 @@
 .mMarquee-Wrapper {
     position: absolute;
+	transform: translateZ(0px);
 }
