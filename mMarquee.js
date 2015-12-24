@@ -20,6 +20,13 @@
 
         // Correct width and height of wrapper
         $marqueeWrapper.outerWidth(marqueeWrapperWidth + 1);
+
+        // Check if there are any children
+        if ($marqueeWrapper.children().length == 0) {
+            return $marqueeWrapper;
+        }
+
+        // Give children the same line-height
         $marqueeWrapper.children().css('line-height', $marquee.height() + 'px');
 
         function cloneWrapper(wrapper) {
